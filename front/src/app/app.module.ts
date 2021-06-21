@@ -13,6 +13,7 @@ import { EditUserComponent } from './screens/user/edit-user/edit-user.component'
 import { ListUserComponent } from './screens/user/list-user/list-user.component';
 import { UserTypeService } from './service/user-type.service';
 import { UserService } from './service/user.service';
+import { MaterialModule } from './material/material.module';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,8 @@ import { UserService } from './service/user.service';
     AppRoutingModule,
     BrowserAnimationsModule,
     ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
+    MaterialModule
   ],
   providers: [
     UserService,
