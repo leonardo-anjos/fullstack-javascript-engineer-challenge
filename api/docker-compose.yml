@@ -1,0 +1,20 @@
+version: '3'
+
+services:
+  postgres:
+    image: postgres
+    container_name: db-maxxidata
+    healthcheck:
+      test: ['CMD', 'pg_isready -U postgres']
+      timeout: 45s
+      interval: 10s
+      retries: 10
+    restart: always
+    environment:
+      - DB_USER=postgres
+      - DB_PASSWORD=postgres
+      - POSTGRES_DB=maxxidata
+    volumes:
+      - ./db:/docker-entrypoint-initdb.d/
+    ports:
+      - 5432:5432
