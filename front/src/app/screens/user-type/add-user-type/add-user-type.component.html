@@ -1,1 +1,16 @@
-<p>add-user-type works!</p>
+<mat-card>
+  <mat-card-title>new user type</mat-card-title>
+  <form>
+    <mat-form-field>
+      <input matInput placeholder="description" name="description">
+    </mat-form-field>
+
+    <mat-form-field>
+      <input matInput placeholder="active" name="active">
+    </mat-form-field>
+  </form>
+
+  <button mat-raised-button (click)="userTypeAdd()" color="primary">save</button>
+  <button mat-raised-button (click)="cancel()">cancel</button>
+</mat-card>
+
