@@ -16,6 +16,17 @@ export class UserService {
     });
   }
 
+  getById(userId: string): Promise<any> {
+    return new Promise((resolve, reject) => {
+      axios.put(`${environment.api.url}/user/${userId}`)
+        .then((result: AxiosResponse) => {
+          resolve(result.data);
+        }).catch(err => {
+          reject(err.response.data);
+        });
+    });
+  }
+
   save(user: UserDto): Promise<any> {
     axios.defaults.timeout = 1200000;
     return new Promise((resolve, reject) => {

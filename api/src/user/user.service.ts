@@ -14,6 +14,10 @@ export class UserService {
     return await this.userRepository.find({ relations: ['user_type'] });
   }
 
+  async findById(id: string): Promise<User> {
+    return await this.userRepository.findOne(id, { relations: ['user_type'] });
+  }
+
   async create(contact: User): Promise<User> {
     return await this.userRepository.save(contact);
   }
