@@ -53,15 +53,14 @@ export class AddUserComponent implements OnInit {
 
   onSubmit() {
     if (this.handleFormValidate(this.formUser.value)) {
-      console.log(this.formUser.value)
-      // this.userService.save(this.formUser.value)
-      //   .then(data => {
-      //     this.snackBar.open('sucess!' || data, 'Ok', { panelClass: 'errorSnackBarCustom', duration: 10000 });
-      //     this.router.navigate(['/user/list'])
-      //   }).catch(err => {
-      //     console.log('err', err)
-      //     this.snackBar.open('error!' || err, 'Ok', { panelClass: 'errorSnackBarCustom', duration: 10000 });
-      //   });
+      this.userService.save(this.formUser.value)
+        .then(data => {
+          this.snackBar.open('sucess!' || data, 'Ok', { panelClass: 'errorSnackBarCustom', duration: 10000 });
+          this.router.navigate(['/user/list'])
+        }).catch(err => {
+          console.log('err', err)
+          this.snackBar.open('error!' || err, 'Ok', { panelClass: 'errorSnackBarCustom', duration: 10000 });
+        });
     }
 
   }
