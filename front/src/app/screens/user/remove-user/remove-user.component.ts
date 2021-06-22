@@ -1,14 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { IUser } from '../../../interfaces/user.interfaces';
-import { UserService } from 'src/app/service/user.service';
+import { UserService } from '../../../service/user.service';
 import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
-  selector: 'app-edit-user',
-  templateUrl: './edit-user.component.html',
-  styleUrls: ['./edit-user.component.scss']
+  selector: 'app-remove-user',
+  templateUrl: './remove-user.component.html',
+  styleUrls: ['./remove-user.component.scss']
 })
-export class EditUserComponent implements OnInit {
+export class RemoveUserComponent implements OnInit {
   user: IUser;
 
   constructor(
@@ -29,10 +29,10 @@ export class EditUserComponent implements OnInit {
       });
   }
 
-  updateProduct(): void {
-    this.userService.update(this.user.id)
+  deleteProduct(): void {
+    this.userService.delete(this.user.id)
       .then((data) => {
-        this.router.navigate(["/user/list"]);
+        this.router.navigate(["/user"]);
         return data;
       })
       .catch((err) => {
@@ -41,7 +41,7 @@ export class EditUserComponent implements OnInit {
   }
 
   cancel(): void {
-    this.router.navigate(["/user/list"]);
+    this.router.navigate(["/user"]);
   }
 
 }

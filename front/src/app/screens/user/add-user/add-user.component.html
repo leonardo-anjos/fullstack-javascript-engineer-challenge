@@ -1,1 +1,28 @@
-<p>add-user works!</p>
+<mat-card>
+  <mat-card-title>new user</mat-card-title>
+  <form>
+    <mat-form-field>
+      <input matInput placeholder="nickname" name="nickname">
+    </mat-form-field>
+
+    <mat-form-field>
+      <input matInput placeholder="name" name="name">
+    </mat-form-field>
+
+    <mat-form-field>
+      <input matInput placeholder="phone" name="phone">
+    </mat-form-field>
+
+    <mat-form-field>
+      <input matInput placeholder="email" name="email">
+    </mat-form-field>
+
+    <mat-form-field>
+      <input matInput placeholder="active" name="active">
+    </mat-form-field>
+  </form>
+
+  <button mat-raised-button (click)="userAdd()" color="primary">save</button>
+  <button mat-raised-button (click)="cancel()">cancel</button>
+</mat-card>
+
