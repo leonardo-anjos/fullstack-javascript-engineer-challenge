@@ -3,7 +3,12 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
+  production: false,
+  api: {
+    key: 'desenvolvimento do teste sucessivo invlusivo e avassalador lacrado 123',
+    timeout: 10000,
+    url: 'http://localhost:3000',
+  },
 };
 
 /*

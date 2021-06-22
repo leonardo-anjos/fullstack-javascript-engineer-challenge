@@ -11,6 +11,11 @@ export class UserController {
     return this.userService.findAll();
   }
 
+  @Get(':id')
+  indexById(@Param('id') id): Promise<any> {
+    return this.userService.findById(id);
+  }
+
   @Post('create')
   async create(@Body() userData: User): Promise<any> {
     return this.userService.create(userData);
@@ -19,7 +24,7 @@ export class UserController {
   @Put(':id/update')
   async update(@Param('id') id, @Body() userData: User): Promise<any> {
     userData.id = Number(id);
-    console.log('Update #' + userData.id)
+    console.log('Update #' + id)
     return this.userService.update(userData);
   }
 
