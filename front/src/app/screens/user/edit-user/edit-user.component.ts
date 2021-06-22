@@ -13,7 +13,7 @@ import { UserTypeService } from '../../../service/user-type.service';
   styleUrls: ['./edit-user.component.scss']
 })
 export class EditUserComponent implements OnInit {
-  user: IUser;
+  userId: string;
 
   formUser: FormGroup;
   submitted: boolean = false;
@@ -52,19 +52,17 @@ export class EditUserComponent implements OnInit {
   }
 
   getIdUser() {
-    const id = this.route.snapshot.paramMap.get("id");
+    this.userId = this.route.snapshot.paramMap.get("id");
 
-    this.userService.getById(id)
+    this.userService.getById(this.userId)
       .then((data) => {
-        this.user = data;
-
         if (data !== {}) {
           this.f.nickname.setValue(data.nickname)
           this.f.name.setValue(data.name)
           this.f.phone.setValue(data.phone)
           this.f.email.setValue(data.email)
           this.f.user_type.setValue(data.user_type.id)
-          this.f.active.setValue(data.active)
+          this.f.active.setValue(data.active.toString())
         }
       })
       .catch((err) => {
@@ -78,15 +76,19 @@ export class EditUserComponent implements OnInit {
 
   onSubmit() {
     if (this.handleFormValidate(this.formUser.value)) {
+      let isTrueSet = (this.formUser.value.active === 'true');
+      this.formUser.value.active = isTrueSet;
+
       console.log(this.formUser.value)
-      // this.userService.update(this.formUser.value)
-      //   .then(data => {
-      //     this.snackBar.open('sucess!' || data, 'Ok', { panelClass: 'errorSnackBarCustom', duration: 10000 });
-      //     this.router.navigate(['/user/list'])
-      //   }).catch(err => {
-      //     console.log('err', err)
-      //     this.snackBar.open('error!' || err, 'Ok', { panelClass: 'errorSnackBarCustom', duration: 10000 });
-      //   });
+
+      this.userService.update(this.userId, this.formUser.value)
+        .then(data => {
+          this.snackBar.open('sucess!' || data, 'Ok', { panelClass: 'errorSnackBarCustom', duration: 10000 });
+          this.router.navigate(['/user/list'])
+        }).catch(err => {
+          console.log('err', err)
+          this.snackBar.open('error!' || err, 'Ok', { panelClass: 'errorSnackBarCustom', duration: 10000 });
+        });
     }
 
   }

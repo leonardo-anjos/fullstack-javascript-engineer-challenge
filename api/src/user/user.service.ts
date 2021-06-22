@@ -18,15 +18,15 @@ export class UserService {
     return await this.userRepository.findOne(id, { relations: ['user_type'] });
   }
 
-  async create(contact: User): Promise<User> {
-    return await this.userRepository.save(contact);
+  async create(user: User): Promise<User> {
+    return await this.userRepository.save(user);
   }
 
-  async update(contact: User): Promise<UpdateResult> {
-    return await this.userRepository.update(contact.id, contact);
+  async update(id: string, user: User): Promise<UpdateResult> {
+    return await this.userRepository.update(id, user);
   }
 
-  async delete(id): Promise<DeleteResult> {
+  async delete(id: string): Promise<DeleteResult> {
     return await this.userRepository.delete(id);
   }
 }

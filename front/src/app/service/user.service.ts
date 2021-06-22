@@ -39,9 +39,9 @@ export class UserService {
     });
   }
 
-  delete(userId: string): Promise<any> {
+  update(userId: string, user: any): Promise<any> {
     return new Promise((resolve, reject) => {
-      axios.delete(`${environment.api.url}/user/${userId}/delete`)
+      axios.put(`${environment.api.url}/user/${userId}/update`, user)
         .then((result: AxiosResponse) => {
           resolve(result.data);
         }).catch(err => {
@@ -50,9 +50,9 @@ export class UserService {
     });
   }
 
-  update(userId: string): Promise<any> {
+  delete(userId: string): Promise<any> {
     return new Promise((resolve, reject) => {
-      axios.put(`${environment.api.url}/user/${userId}/delete`)
+      axios.delete(`${environment.api.url}/user/${userId}/delete`)
         .then((result: AxiosResponse) => {
           resolve(result.data);
         }).catch(err => {
