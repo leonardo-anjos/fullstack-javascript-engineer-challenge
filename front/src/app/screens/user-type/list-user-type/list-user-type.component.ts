@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { IUserType } from '../../../interfaces/user-type.interfaces';
-import { UserTypeService } from '../../../service/user-type.service';
+import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
+import { UserTypeService } from '../../../service/user-type.service';
+import { IUserType } from '../../../interfaces/user-type.interfaces';
 
 @Component({
   selector: 'app-list-user-type',
@@ -10,13 +11,10 @@ import { Router } from '@angular/router';
 })
 export class ListUserTypeComponent implements OnInit {
 
-  usersType: IUserType[];
+  displayedColumns = ['id', 'description', 'active'];
 
-  displayedColumns = [
-    'description',
-    'active',
-    'action'
-  ];
+  usersType: IUserType[];
+  dataSource: MatTableDataSource<IUserType>;
 
   constructor(
     private readonly userTypeService: UserTypeService,
@@ -27,6 +25,7 @@ export class ListUserTypeComponent implements OnInit {
     this.userTypeService.getAll()
       .then((data) => {
         this.usersType = data;
+        this.dataSource = new MatTableDataSource(this.usersType);
       })
       .catch((err) => {
         console.error("Err load events", err);
@@ -35,6 +34,11 @@ export class ListUserTypeComponent implements OnInit {
 
   navigateToUserTypeAdd(): void {
     this.router.navigate(['/user-type/add'])
+  }
+
+  applyFilter(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.dataSource.filter = filterValue.trim().toLowerCase();
   }
 
 }
