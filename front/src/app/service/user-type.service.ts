@@ -29,7 +29,7 @@ export class UserTypeService {
   save(user: UserTypeDto): Promise<any> {
     axios.defaults.timeout = 1200000;
     return new Promise((resolve, reject) => {
-      axios.post(`${environment.api.url}/user-type`, user)
+      axios.post(`${environment.api.url}/user-type/create`, user)
         .then((result: AxiosResponse) => {
           resolve(result.data);
         }).catch(err => {

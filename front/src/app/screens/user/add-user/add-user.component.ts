@@ -6,24 +6,17 @@ import { Router } from '@angular/router';
 import { IUserType } from '../../../interfaces/user-type.interfaces';
 import { UserTypeService } from '../../../service/user-type.service';
 import { UserService } from '../../../service/user.service';
-interface SelectForm {
-  label: string,
-  value: boolean
-}
 @Component({
   selector: 'app-add-user',
   templateUrl: './add-user.component.html',
   styleUrls: ['./add-user.component.scss']
 })
 export class AddUserComponent implements OnInit {
-  formPaciente: FormGroup;
+  formUser: FormGroup;
   submitted: boolean = false;
 
   userTypes: IUserType[];
   userTypeSelected: string;
-
-  status: SelectForm[];
-  statusSelected: boolean;
 
   constructor(
     private readonly userService: UserService,
@@ -33,7 +26,6 @@ export class AddUserComponent implements OnInit {
     private readonly userTypeService: UserTypeService
   ) {
     this.userTypeSelected = '';
-    this.statusSelected = true;
 
     this.userTypeService.getAll()
       .then((data) => {
@@ -42,15 +34,10 @@ export class AddUserComponent implements OnInit {
       .catch((err) => {
         console.error("Err load events", err);
       });
-
-    this.status = [
-      { label: 'true', value: true },
-      { label: 'false', value: false },
-    ];
   }
 
   ngOnInit(): void {
-    this.formPaciente = this.formBuilder.group({
+    this.formUser = this.formBuilder.group({
       nickname: ['', Validators.required],
       name: ['', Validators.required],
       phone: ['', Validators.required],
@@ -65,49 +52,50 @@ export class AddUserComponent implements OnInit {
   }
 
   onSubmit() {
-    if (this.formularioValido(this.formPaciente.value)) {
-      this.userService.save(this.formPaciente.value)
-        .then(data => {
-          this.snackBar.open('sucess!' || data, 'Ok', { panelClass: 'errorSnackBarCustom', duration: 10000 });
-          this.router.navigate(['/user/list'])
-        }).catch(err => {
-          console.log('err', err)
-          this.snackBar.open('error!' || err, 'Ok', { panelClass: 'errorSnackBarCustom', duration: 10000 });
-        });
+    if (this.handleFormValidate(this.formUser.value)) {
+      console.log(this.formUser.value)
+      // this.userService.save(this.formUser.value)
+      //   .then(data => {
+      //     this.snackBar.open('sucess!' || data, 'Ok', { panelClass: 'errorSnackBarCustom', duration: 10000 });
+      //     this.router.navigate(['/user/list'])
+      //   }).catch(err => {
+      //     console.log('err', err)
+      //     this.snackBar.open('error!' || err, 'Ok', { panelClass: 'errorSnackBarCustom', duration: 10000 });
+      //   });
     }
 
   }
 
-  public formularioValido(dadosForm): boolean {
+  public handleFormValidate(formData): boolean {
     this.submitted = true;
 
-    if (!dadosForm.nickname) {
+    if (!formData.nickname) {
       return false;
     }
 
-    if (!dadosForm.name) {
+    if (!formData.name) {
       return false;
     }
 
-    if (!dadosForm.phone) {
+    if (!formData.phone) {
       return false;
     }
 
-    if (!dadosForm.email) {
+    if (!formData.email) {
       return false;
     }
 
-    if (!dadosForm.user_type) {
+    if (!formData.user_type) {
       return false;
     }
 
-    if (!dadosForm.active) {
+    if (!formData.active) {
       return false;
     }
 
     return true;
   }
 
-  get f() { return this.formPaciente.controls; }
+  get f() { return this.formUser.controls; }
 
 }

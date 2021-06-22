@@ -1,16 +1,18 @@
 <mat-card>
   <mat-card-title>new user type</mat-card-title>
-  <form>
+  <form [formGroup]="formUserType">
     <mat-form-field>
-      <input matInput placeholder="description" name="description">
+      <input matInput formControlName="description" placeholder="description" id="description" name="description" required>
     </mat-form-field>
 
-    <mat-form-field>
-      <input matInput placeholder="active" name="active">
-    </mat-form-field>
+    <label>active *</label>
+    <mat-radio-group formControlName="active" required>
+      <mat-radio-button style="padding-right: 10px;" value="true">true</mat-radio-button>
+      <mat-radio-button value="false">false</mat-radio-button>
+    </mat-radio-group>
   </form>
 
-  <button mat-raised-button (click)="userTypeAdd()" color="primary">save</button>
+  <button mat-raised-button (click)="onSubmit()" color="primary">save</button>
   <button mat-raised-button (click)="cancel()">cancel</button>
 </mat-card>
 
