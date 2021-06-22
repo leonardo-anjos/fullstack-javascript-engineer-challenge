@@ -12,10 +12,8 @@ export class UserType {
   active: boolean;
 
   @UpdateDateColumn()
-  // @UpdateDateColumn({ type: 'timestamptz', default: () => 'CURRENT_TIMESTAMP' })
   updatedAt: Date;
 
   @CreateDateColumn()
-  // @CreateDateColumn({ type: 'timestamptz', default: () => 'CURRENT_TIMESTAMP' })
   createdAt: Date;
 }

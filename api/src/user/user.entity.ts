@@ -1,4 +1,4 @@
-import { Column, CreateDateColumn, Entity, JoinColumn, OneToOne, PrimaryGeneratedColumn, UpdateDateColumn } from 'typeorm';
+import { Column, CreateDateColumn, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn, UpdateDateColumn } from 'typeorm';
 import { UserType } from 'user-type/user-type.entity';
 
 @Entity()
@@ -18,7 +18,7 @@ export class User {
   @Column({ type: 'text', length: 255, nullable: false })
   email: string;
 
-  @OneToOne(() => UserType)
+  @ManyToOne(() => UserType)
   @JoinColumn()
   user_type: UserType;
 
@@ -26,10 +26,8 @@ export class User {
   active: boolean;
 
   @UpdateDateColumn()
-  // @UpdateDateColumn({ type: 'timestamptz', default: () => 'CURRENT_TIMESTAMP' })
   updatedAt: Date;
 
   @CreateDateColumn()
-  // @CreateDateColumn({ type: 'timestamptz', default: () => 'CURRENT_TIMESTAMP' })
   createdAt: Date;
 }
