@@ -16,15 +16,13 @@ export class UserTypeController {
     return this.userTypeService.create(userTypeData);
   }
 
-  @Put(':id/update')
-  async update(@Param('id') id, @Body() userTypeData: UserType): Promise<any> {
-    userTypeData.id = Number(id);
-    console.log('Update #' + userTypeData.id)
-    return this.userTypeService.update(userTypeData);
-  }
+  // @Put(':id/update')
+  // async update(@Param('id') id, @Body() userTypeData: UserType): Promise<any> {
+  //   return this.userTypeService.update(id, userTypeData);
+  // }
 
-  @Delete(':id/delete')
-  async delete(@Param('id') id): Promise<any> {
-    return this.userTypeService.delete(id);
-  }
+  // @Delete(':id/delete')
+  // async delete(@Param('id') id): Promise<any> {
+  //   return this.userTypeService.delete(id);
+  // }
 }
