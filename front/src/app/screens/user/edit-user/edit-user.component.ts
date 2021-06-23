@@ -79,8 +79,6 @@ export class EditUserComponent implements OnInit {
       let isTrueSet = (this.formUser.value.active === 'true');
       this.formUser.value.active = isTrueSet;
 
-      console.log(this.formUser.value)
-
       this.userService.update(this.userId, this.formUser.value)
         .then(data => {
           this.snackBar.open('sucess!' || data, 'Ok', { panelClass: 'errorSnackBarCustom', duration: 10000 });

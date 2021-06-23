@@ -1,1 +1,37 @@
-<p>remove-user works!</p>
+<mat-card>
+  <mat-card-title>update user</mat-card-title>
+  <form [formGroup]="formUser">
+    <mat-form-field>
+      <input matInput formControlName="nickname" placeholder="nickname" id="nickname" name="nickname" readonly>
+    </mat-form-field>
+
+    <mat-form-field>
+      <input matInput formControlName="name" placeholder="name" id="name" name="name" readonly>
+    </mat-form-field>
+
+    <mat-form-field>
+      <input matInput formControlName="phone" placeholder="phone" id="phone" name="phone" mask="(00) 00000.0000" readonly>
+    </mat-form-field>
+
+    <mat-form-field>
+      <input matInput formControlName="email" placeholder="email" id="email" name="email" readonly>
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-select [(ngModel)]="userTypeSelected" placeholder="user_type" name="user_type" id="user_type" formControlName="user_type" disabled>
+        <mat-option *ngFor="let type of userTypes" [(value)]="type.id">
+          {{type.description}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <label>active *</label>
+    <mat-radio-group formControlName="active" name="active" id="active" disabled>
+      <mat-radio-button style="padding-right: 10px;" value="true">true</mat-radio-button>
+      <mat-radio-button value="false">false</mat-radio-button>
+    </mat-radio-group>
+  </form>
+
+  <button mat-raised-button (click)="onSubmit()" color="primary">remove</button>
+  <button mat-raised-button (click)="cancel()">cancel</button>
+</mat-card>
